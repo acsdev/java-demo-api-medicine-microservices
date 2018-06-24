@@ -1,10 +1,10 @@
 package br.hackthon.account;
 
 import br.hackthon.account.commons.JsonUtil;
-import br.hackthon.account.commons.Security;
-import br.hackthon.account.service.AccountService;
 import br.hackthon.account.commons.LoginDTO;
+import br.hackthon.account.commons.Security;
 import br.hackthon.account.model.jooq.tables.pojos.Account;
+import br.hackthon.account.service.AccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Route;

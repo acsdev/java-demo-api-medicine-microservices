@@ -13,31 +13,12 @@
 
     <artifactId>account</artifactId>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
     <dependencies>
 
         <dependency>
             <artifactId>commons</artifactId>
             <groupId>br.hackthon.justfeelwell</groupId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sparkjava</groupId>
-            <artifactId>spark-core</artifactId>
-            <version>2.7.2</version>
         </dependency>
 
         <dependency>
@@ -64,10 +45,5 @@
             <version>8.0.9-rc</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.8.4</version>
-        </dependency>
     </dependencies>
 </project>
