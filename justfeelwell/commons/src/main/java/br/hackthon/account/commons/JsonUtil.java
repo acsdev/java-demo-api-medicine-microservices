@@ -9,11 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+/**
+ * Util class to work with JSON
+ */
 public class JsonUtil {
-
-    private static JsonDeserializer<LocalDateTime> localDateTimeJsonDeserializer =  (json, type, context) ->
-            DateTimeFormatter.ISO_LOCAL_DATE_TIME.parse(json.getAsString(), LocalDateTime::from);
 
     /**
      * Parse list of serializble to JSON

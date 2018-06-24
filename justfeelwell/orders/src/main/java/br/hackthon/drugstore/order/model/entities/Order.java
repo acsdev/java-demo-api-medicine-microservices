@@ -1,13 +1,21 @@
 package br.hackthon.drugstore.order.model.entities;
 
 import br.hackthon.account.commons.JsonUtil;
+import br.hackthon.drugstore.order.model.Connection;
+import br.hackthon.drugstore.order.model.entities.nested.Item;
 import com.mongodb.client.model.geojson.Point;
 import com.mongodb.client.model.geojson.Position;
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.query.WhereCriteria;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Entity
 public class Order implements Serializable {
@@ -23,8 +31,16 @@ public class Order implements Serializable {
 
     private Point drugstoreCoordinates;
 
+    private LocalDateTime orderDate = LocalDateTime.now();
+
+    private List<Item> itens;
+
+    public Order(ObjectId id) {
+        this.setId( id );
+    }
+
     public Order() {
-        this.setId( new ObjectId() );
+       this( new ObjectId() );
     }
 
     public ObjectId getId() {
@@ -67,20 +83,25 @@ public class Order implements Serializable {
         return drugstoreCoordinates;
     }
 
-    public static void main(String[] args) {
-        Order order = new Order();
+    public LocalDateTime getOrderDate() {
+        return orderDate;
+    }
 
-        order.setAccountName( "asdasd " );
-        order.setAccountCoordinates( new Point(
-                new Position(-13.213123, 64.21312312)) );
+    public void setOrderDate(LocalDateTime orderDate) {
+        this.orderDate = orderDate;
+    }
 
-        String s = JsonUtil.getAsJson( order );
+    public List<Item> getItens() {
+        if (itens == null) return null;
+        return new ArrayList<>(itens); // DEFENSE PROGRAMING
+    }
 
-        System.out.println(s);
+    public void setItens(List<Item> itens) {
+        this.itens = itens;
+    }
 
-        Order asObject = JsonUtil.getAsObject(s, Order.class);
-
-        System.out.println( asObject );
-
+    public void addItem(Item item) {
+        this.itens = Optional.ofNullable( this.itens ).orElse(new ArrayList<>());
+        this.itens.add( item );
     }
 }

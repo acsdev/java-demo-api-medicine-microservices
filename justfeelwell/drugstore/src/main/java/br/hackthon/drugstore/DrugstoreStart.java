@@ -1,6 +1,7 @@
 package br.hackthon.drugstore;
 
 
+import spark.Service;
 import spark.Spark;
 
 public class DrugstoreStart {
@@ -8,30 +9,31 @@ public class DrugstoreStart {
     public static void main(String[] args) {
 
         //TODO USE CONSTANTS FOR CONFIGURATION DATA
+        Service http = Service.ignite();
 
-        Spark.ipAddress( "localhost" );
+        http.ipAddress( "localhost" );
 
-        Spark.port(9002);
+        http.port(9002);
 
         // ALWAYS WORK WITH JSON
-        Spark.after(((request, response) -> response.type("application/json")));
+        http.after(((request, response) -> response.type("application/json")));
 
-        Spark.exception(RuntimeException.class, (e, request, response) -> {
+        http.exception(RuntimeException.class, (e, request, response) -> {
             response.status( 500 );
             response.body( "Unexpected error!" );
         });
 
-        Spark.post("/drugs/register", DrugsoreRoutes.resgisterDrug);
+        http.post("/drugs/register", DrugsoreRoutes.resgisterDrug);
 
-        Spark.get("/drugs/:drugId"  , DrugsoreRoutes.recoverDrug);
-
-
-        Spark.post("/store/register", DrugsoreRoutes.registerStore);
-
-        Spark.post("/store/register/:storeId/drugs", DrugsoreRoutes.resgisterDrugOnstore);
+        http.get("/drugs/:drugId"  , DrugsoreRoutes.recoverDrug);
 
 
-        Spark.get("/store/:storeId/drugs",  DrugsoreRoutes.drugsOnDrugstore);
+        http.post("/store/register", DrugsoreRoutes.registerStore);
+
+        http.post("/store/register/:storeId/drugs", DrugsoreRoutes.resgisterDrugOnstore);
+
+
+        http.get("/store/:storeId/drugs",  DrugsoreRoutes.drugsOnDrugstore);
     }
 
 

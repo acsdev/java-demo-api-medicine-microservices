@@ -1,5 +1,6 @@
 package br.hackthon.drugstore.order.model;
 
+import br.hackthon.drugstore.order.model.entities.Order;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
@@ -26,16 +27,19 @@ public class Connection {
 
             Morphia mmorphia = new Morphia();
 
+            mmorphia.mapPackage( Order.class.getPackage().getName() );
+
+
             ServerAddress addr = new ServerAddress("localhost", 27018);
 
             List<MongoCredential> credentialsList = new ArrayList<MongoCredential>();
             MongoCredential credentia = MongoCredential.createCredential(
-                    "order", "order", "order".toCharArray());
+                    "order", "orders", "order".toCharArray());
             credentialsList.add(credentia);
 
             MongoClient client = new MongoClient(addr, credentialsList);
 
-            Connection.datastore = mmorphia.createDatastore(client, "dbname");
+            Connection.datastore = mmorphia.createDatastore(client, "orders");
 
         }
 
