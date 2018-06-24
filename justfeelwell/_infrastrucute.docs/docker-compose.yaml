@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+
+  mysql_service_account:
+    container_name: mysql_account
+    restart: always
+    image: mysql/mysql-server:latest
+    ports:
+      - "3307:3306"
+      - "33070:33060"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=account
+      - MYSQL_USER=account
+      - MYSQL_PASSWORD=account
+    volumes:
+      - "./account:/docker-entrypoint-initdb.d"
+
+  mysql_service_drugs:
+    container_name: mysql_drugstore
+    restart: always
+    image: mysql/mysql-server:latest
+    ports:
+      - "3308:3306"
+      - "33080:33060"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=drugstore
+      - MYSQL_USER=drugstore
+      - MYSQL_PASSWORD=drugstore
+    volumes:
+      - "./drugstore:/docker-entrypoint-initdb.d"
+
+  mongodb_order_service:
+      container_name: mongodb_orders
+      restart: always
+      image: mongo:3.6.5
+      ports:
+        - "27018:27017"
+      volumes:
+        - "./orders:/docker-entrypoint-initdb.d"
+      command: mongod --auth # TO MAKE SURE THAT WILL BE NECESSARY AUTHENTICATE TO USE DATABASE
