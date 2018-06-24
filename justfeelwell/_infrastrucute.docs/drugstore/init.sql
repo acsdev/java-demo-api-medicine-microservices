@@ -17,6 +17,7 @@ create table drug (
 create table store_drugs (
   id_store bigint not null,
   id_drug bigint not null,
+  vl_price decimal(11, 8),
   foreign key (id_store) REFERENCES drugstore (id_store),
   foreign key (id_drug) REFERENCES drug (id_drug)
 );
