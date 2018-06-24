@@ -1,5 +1,6 @@
 package br.hackthon.drugstore;
 
+import br.hackthon.account.commons.JsonUtil;
 import br.hackthon.drugstore.jooq.tables.pojos.Drug;
 import br.hackthon.drugstore.jooq.tables.pojos.Drugstore;
 import br.hackthon.drugstore.service.DrugstoreService;
@@ -38,8 +39,10 @@ public class DrugsoreRoutes {
      */
     public static Route registerStore = (request, response) -> {
 
+        Drugstore drugstore = JsonUtil.getAsObject(request.body(), Drugstore.class);
+
         // TODO FINISH TO IMPLEMENT
-        return new DrugstoreService().save( new Drugstore() );
+        return new DrugstoreService().save( drugstore );
 
     };
 
