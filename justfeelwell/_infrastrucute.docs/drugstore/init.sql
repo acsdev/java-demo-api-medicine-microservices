@@ -2,7 +2,7 @@ use drugstore
 
 create table drugstore (
 	id_store bigint not null auto_increment primary key,
-	ds_name varchar(200) not null unique,
+	ds_name varchar(200) not null,
 	ds_address varchar(200) not null,
 	vl_latitude decimal(10, 8),
 	vl_longitude decimal(11, 8)

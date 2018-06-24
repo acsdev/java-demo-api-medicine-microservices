@@ -38,7 +38,7 @@ public class DrugstoreTest {
 
 
         Drugstore drugstore = new Drugstore();
-        drugstore.setDsName("Great drug store ");
+        drugstore.setDsName("Great drug store");
         drugstore.setDsAddress("Great street, 456, Winnepeg"); // TODO USE GOOGLE API TO GET COORDINATES
         drugstore.setVlLatitude( new BigDecimal(49.88709860 ));
         drugstore.setVlLongitude( new BigDecimal(-97.16837890 ));
