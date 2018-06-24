@@ -24,7 +24,6 @@ public class AccountRoutes {
             LOG.error( JsonUtil.getAsJson(out) );
         }
 
-
         return out;
 
     };
@@ -46,7 +45,7 @@ public class AccountRoutes {
 
         response.header(Security.HEADER_AUTH,  Security.TOKEN_PREFIX.concat(token));
 
-        return account;
+        return token;
 
     };
 

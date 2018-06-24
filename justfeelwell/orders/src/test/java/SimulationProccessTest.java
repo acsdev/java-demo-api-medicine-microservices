@@ -2,6 +2,7 @@ import br.hackthon.account.AccountStart;
 import br.hackthon.account.commons.HTTPCall;
 import br.hackthon.account.commons.JsonUtil;
 import br.hackthon.account.commons.LoginDTO;
+import br.hackthon.account.commons.Security;
 import br.hackthon.drugstore.order.OrderStart;
 import br.hackthon.drugstore.order.model.entities.Order;
 import br.hackthon.drugstore.order.model.entities.nested.Item;
@@ -9,6 +10,9 @@ import com.mongodb.client.model.geojson.Point;
 import com.mongodb.client.model.geojson.Position;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.util.Collections;
+import java.util.Map;
 
 /**
  *
@@ -38,7 +42,8 @@ public class SimulationProccessTest {
     public void signIn() {
         String toSignIn = JsonUtil.getAsJson(new LoginDTO("tst.order", "123"));
 
-        HTTPCall.doPostAndReturnJson(ENDPOINT_USER.concat("/usr/signin"), toSignIn);
+        String token = HTTPCall.doPostAndReturnJson(ENDPOINT_USER.concat("/usr/signin"), toSignIn);
+        Map<String, String> headerValues = Collections.singletonMap(Security.HEADER_AUTH, token);
 
         Order order = new Order();
 
@@ -57,6 +62,7 @@ public class SimulationProccessTest {
 
         String orderJsonDATA = JsonUtil.getAsJson( order );
 
-        HTTPCall.doPostAndReturnJson(ENDPOINT_ORDER.concat("/order"), orderJsonDATA);
+
+        HTTPCall.doPostAndReturnJson(ENDPOINT_ORDER.concat("/order"), orderJsonDATA, headerValues);
     }
 }

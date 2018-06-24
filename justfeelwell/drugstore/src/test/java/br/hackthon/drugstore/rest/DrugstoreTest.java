@@ -9,11 +9,11 @@ import br.hackthon.drugstore.jooq.tables.pojos.Drugstore;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import spark.Spark;
+
+import java.math.BigDecimal;
 
 public class DrugstoreTest {
 
@@ -23,15 +23,8 @@ public class DrugstoreTest {
     public static void setup() {
 
         DrugstoreStart.main(new String[]{});
-
-        Spark.awaitInitialization();
     }
 
-    @AfterClass
-    public static void setdown() {
-
-        Spark.stop();
-    }
 
     @Before
     public void prepare() {
@@ -43,9 +36,12 @@ public class DrugstoreTest {
     @Test
     public void registerTest() {
 
-        // TODO FILL THE DATE OF DRUGSTORE
 
         Drugstore drugstore = new Drugstore();
+        drugstore.setDsName("Great drug store ");
+        drugstore.setDsAddress("Great street, 456, Winnepeg"); // TODO USE GOOGLE API TO GET COORDINATES
+        drugstore.setVlLatitude( new BigDecimal(49.88709860 ));
+        drugstore.setVlLongitude( new BigDecimal(-97.16837890 ));
 
         String asJson = JsonUtil.getAsJson(drugstore);
 

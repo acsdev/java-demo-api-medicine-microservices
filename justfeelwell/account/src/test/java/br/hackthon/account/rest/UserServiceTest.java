@@ -29,13 +29,6 @@ public class UserServiceTest {
 
         AccountStart.main(new String[]{});
 
-        Spark.awaitInitialization();
-    }
-
-    @AfterClass
-    public static void setdown() {
-
-        Spark.stop();
     }
 
     @Before

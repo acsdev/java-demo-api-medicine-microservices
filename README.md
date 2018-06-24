@@ -18,3 +18,11 @@ Stack:
   * mysql
   * mongodb
   * docker
+
+## Useful command
+
+docker-compose down -v 
+- To clean all data and start from screcth
+
+docker-compose up
+- To prepare environment and start to use
