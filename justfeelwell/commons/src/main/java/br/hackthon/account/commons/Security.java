@@ -16,6 +16,11 @@ public class Security {
 
     public static final String HEADER_AUTH   = "Authorization";
 
+    public static boolean isTokeValid(String token) {
+        //TODO VALIDATION TOKEN
+        return true;
+    }
+
     public static String getToken(String useruame) {
         return Jwts.builder()
             .setSubject( useruame )

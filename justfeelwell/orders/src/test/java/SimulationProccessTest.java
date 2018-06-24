@@ -35,6 +35,12 @@ public class SimulationProccessTest {
         AccountStart.main(new String[]{});
 
         OrderStart.main(new String[]{});
+
+        try {
+            Thread.sleep( 2000 ); // Find better way to to this
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 

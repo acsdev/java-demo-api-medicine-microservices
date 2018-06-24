@@ -13,6 +13,11 @@ public class OrderRoutes {
 
         String token = request.headers(Security.HEADER_AUTH);
 
+        boolean valid = Security.isTokeValid( token );
+        if (! valid) {
+            throw new IllegalAccessException("Invalid token"); //TODO CREATE A BETTER EXCEPTION
+        }
+
         Order order = JsonUtil.getAsObject(request.body(), Order.class);
 
         return new OrderService().createOrder(token, order );
